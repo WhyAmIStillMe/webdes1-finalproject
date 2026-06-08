@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Electrolize&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="assets/styles.css" />
+  <title>GameOn!</title>
+</head>
+
+<body>
+  <nav>
+    <main>
+      <div id="logo">GameOn!</div>
+      <div class="nav_item">Home</div>
+      <div class="nav_item">Games</div>
+      <div class="nav_item">Consoles</div>
+      <div class="nav_item">PC</div>
+      <div class="nav_item2">Profile</div>
+      <div class="nav_item2">Cart</div>
+    </main>
+  </nav>
+
+  <section id="hero">
+    <main>
+  <div class="drop-box">
+    <span class="letter"><i>G</i></span> 
+    <span class="letter"><i>a</i></span> 
+    <span class="letter"><i>m</i></span> 
+    <span class="letter"><i>e</i></span> 
+    <span class="letter"><i>O</i></span> 
+    <span class="letter"><i>n</i></span> 
+    <span class="letter"><i>!</i></span> 
+  </div>
+      <h1 id="main_title">Your hub for all of your gaming needs.</h1>
+      <button type="button" id="main_hero_btn"><a href="subindex3.html">What's New?</a></button>
+    </main>
+  </section>
+
+  <section id="twocards">
+    <main>
+      <h3 class="section_header">Featured</h3>
+      <div class="card_container">
+        <div class="card two">
+          <div class="card_title">Nintendo Switch 2</div>
+          <div class="card_text">The next generation of Nintendo Switch family.</div>
+          <button type="button" class="card_btn"><a href="subindex1.html">Learn More</a></button>
+        </div>
+        <div class="card two">
+          <div class="card_title">Steam Deck OLED</div>
+          <div class="card_text">An upgraded version from Steam Deck.</div>
+          <button type="button" class="card_btn"><a href="subindex2.html">Learn More</a></button>
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <section id="fivecards">
+    <main>
+      <h3 class="section_header">Other Items</h3>
+      <div class="card_container" id="putithere">
+        <!-- <div class="card five">
+          <div class="card_img"></div>
+          <div class="card_title">Card One</div>
+          <button type="button" class="card_btn">Buy</button>
+        </div> -->
+      </div>
+      <button type="button" id="see_more">See More</button>
+    </main>
+  </section>
+
+<footer class="site-footer">
+  <div class="footer-container">
+
+    <!-- Column 1 -->
+    <div class="footer-column">
+      <h3>Company</h3>
+      <ul class="footer-links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press Kit</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 2 -->
+    <div class="footer-column">
+      <h3>Support</h3>
+      <ul class="footer-links">
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+
+  </div>
+</footer>
+
+</html>
+
+<script>
+let data = [
+  {
+    "image": "assets/img/1.png",
+    "title": "PlayStation 5"
+  },
+  {
+    "image": "assets/img/2.png",
+    "title": "PlayStation 4"
+  },
+  {
+    "image": "assets/img/3.png",
+    "title": "Nintendo Switch OLED"
+  },
+  {
+    "image": "assets/img/4.png",
+    "title": "Xbox Series X"
+  },
+  {
+    "image": "assets/img/5.png",
+    "title": "Xbox One"
+  },
+  {
+    "image": "assets/img/6.png",
+    "title": "ROG"
+  },
+  {
+    "image": "assets/img/7.png",
+    "title": "Razer"
+  },
+  {
+    "image": "assets/img/8.png",
+    "title": "Alienware"
+  },
+  {
+    "image": "assets/img/9.png",
+    "title": "Lenovo Legion"
+  },
+  {
+    "image": "assets/img/10.png",
+    "title": "MSi"
+  },
+];
+let thetarget = document.querySelector('#putithere');
+let seeMoreBtn = document.getElementById('see_more');
+const CARDS_PER_LOAD = 5;
+let currentIndex = 0;
+
+function createCardHTML(item, index) {
+  let cardTitle = item.title;
+
+  return `<div class="card five">
+          <div class="card_img" style="background-image:url('${item.image}')"></div>
+          <div class="card_title">${cardTitle}</div>
+          <button type="button" class="card_btn">Buy</button>
+        </div>`;
+}
+
+function loadMoreCards() {
+
+  const cardsToLoad = Math.min(CARDS_PER_LOAD, data.length - currentIndex);
+
+  if (cardsToLoad <= 0) {
+    seeMoreBtn.style.display = 'none';
+    console.log("All data loaded. See More button hidden.");
+    return;
+  }
+
+  const cardsData = data.slice(currentIndex, currentIndex + cardsToLoad);
+
+  let newHTML = '';
+  cardsData.forEach((item, indexOffset) => {
+    // We pass the original item and the offset within the current batch
+    newHTML += createCardHTML(item, currentIndex + indexOffset);
+  });
+
+  thetarget.insertAdjacentHTML('beforeend', newHTML);
+
+  currentIndex += cardsToLoad;
+
+  if (currentIndex >= data.length) {
+    seeMoreBtn.style.display = 'none';
+  } else {
+
+    seeMoreBtn.innerText = `See More (${data.length - currentIndex} left)`;
+  }
+}
+
+loadMoreCards();
+
+seeMoreBtn.addEventListener('click', loadMoreCards);
+</script>
