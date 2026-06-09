@@ -206,6 +206,13 @@ h3.section_header {
   background-color: #003366;
 }
 
+@media (max-width: 600px) {
+  #twocards {
+    font-size: 64px;
+    background-size: cover;
+  }
+}
+
 .card_container {
   position: relative;
   width: 100%;
