@@ -51,7 +51,7 @@ nav .nav_item {
   height: 90px;
   float: left;
   color: white;
-
+  cursor: pointer;
   font-weight: bold;
   top: 32px;
   font-size: 18px;
@@ -227,6 +227,7 @@ button#see_more {
   width: calc(300px - 50px - 50px);
   height: calc(400px - 32px - 32px);
   margin-right: 20px;
+  margin-block-start: 20px;
   background: #0070CC;
   background: linear-gradient(90deg, rgba(0, 112, 204, 1) 0%, rgba(0, 212, 255, 1) 100%);
 }
@@ -245,6 +246,9 @@ button#see_more {
   background-color: white;
   border-radius: 15px;
   row-gap: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 #fivecards .card_title {
